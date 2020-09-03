@@ -1,0 +1,24 @@
+$blue-light: #1877f2;
+$green: #609e4d;
+$red: #de5246;
+
+.bg- {
+  &blue-light {
+    background-color: $blue-light;
+    color: white;
+  }
+  &green {
+    background-color: $green;
+    color: white;
+  }
+  &red {
+    background-color: $red;
+    color: white;
+  }
+}
+
+.text- {
+  &blue-light {
+    color: $blue-light;
+  }
+}
