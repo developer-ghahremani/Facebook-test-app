@@ -22,7 +22,7 @@ const TopNavBar = () => {
             </div>
             <div className="d-flex align-items-center ">
               <div className="d-flex navbar-item  align-items-center">
-                <Avatar style={{ height: "2rem", width: "2rem" }}></Avatar>
+                <Avatar style={{ height: "1.5rem", width: "1.5rem" }}></Avatar>
                 <span className="mx-1">Reza</span>
               </div>
               <div className="navbar-item navbar-item-active">Home</div>
