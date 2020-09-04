@@ -1,10 +1,12 @@
 import React from "react";
 import MainLayout from "../layout/MainLayout";
+import CreatePost from "../components/CreatePost";
 
 const Home = () => {
   return (
     <MainLayout>
-      <p>home page</p>
+      <CreatePost />
+      <Feeds />
     </MainLayout>
   );
 };

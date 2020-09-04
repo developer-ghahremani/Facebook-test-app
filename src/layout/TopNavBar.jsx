@@ -20,7 +20,6 @@ const TopNavBar = () => {
                 <button type="submit" className="d-none"></button>
               </form>
             </div>
-
             <div className="d-flex align-items-center ">
               <div className="d-flex navbar-item  align-items-center">
                 <Avatar style={{ height: "2rem", width: "2rem" }}></Avatar>

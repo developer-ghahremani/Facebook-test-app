@@ -18,3 +18,10 @@
     background-color: #3b5ca0;
   }
 }
+
+.sidebar-item {
+  &:hover {
+    background-color: white;
+    cursor: pointer;
+  }
+}
