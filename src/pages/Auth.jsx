@@ -1,7 +1,50 @@
-import React from "react";
-import MainLayout from "../layout/MainLayout";
-
+import React, { useEffect } from "react";
+import { auth, googleAuth } from "./../firebase";
+import { useDispatch } from "react-redux";
+import { SET_USER } from "../Redux/type";
+import firebase from "firebase";
+import { useRef } from "react";
 const Auth = () => {
+  const dispatch = useDispatch();
+  const signInBtn = useRef(null);
+
+  useEffect(() => {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+      signInBtn.current,
+      {
+        size: "invisible",
+        callback: function (response) {
+          console.log(response);
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          // onSignInSubmit();
+        },
+      }
+    );
+  }, []);
+
+  const handlePhoneLogin = async (params) => {
+    try {
+      const confirmationResult = await auth.signInWithPhoneNumber(
+        "+989126894100",
+        window.recaptchaVerifier
+      );
+
+      window.confirmationResult = confirmationResult;
+      console.log(confirmationResult, "cnf");
+    } catch (error) {
+      console.log(error, "err");
+    }
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      const { credential, user } = await auth.signInWithPopup(googleAuth);
+      localStorage.setItem("credential", JSON.stringify(credential));
+      dispatch({ type: SET_USER, payload: user });
+    } catch ({ message }) {
+      console.log(message);
+    }
+  };
+  // return <p>Hello</p>;
   return (
     <div
       className="bg-light w-100 d-flex align-items-center justify-content-center"
@@ -18,6 +61,7 @@ const Auth = () => {
               Facebook helps you connect and share with the pwople in your life
             </h3>
           </div>
+
           <div className="auth-right-side col-md-5">
             <div className="card shadow w-100">
               <div className="card-body">
@@ -31,6 +75,7 @@ const Auth = () => {
                       aria-describedby="basic-addon1"
                     />
                   </div>
+
                   <div class="input-group mb-3">
                     <input
                       type="text"
@@ -40,6 +85,7 @@ const Auth = () => {
                       aria-describedby="basic-addon1"
                     />
                   </div>
+
                   <button
                     className="btn btn-primary w-100 bg-blue-light"
                     type="submit">
@@ -57,11 +103,17 @@ const Auth = () => {
                   </button>
 
                   <div className="row justify-content-between w-100">
-                    <button type="button" className="btn bg-red my-2">
+                    <button
+                      type="button"
+                      className="btn bg-red my-2"
+                      onClick={handleGoogleLogin}>
                       Log In With Google
                     </button>
 
-                    <button type="button" className="btn bg-primary  my-2">
+                    <button
+                      ref={signInBtn}
+                      className="btn bg-primary  my-2"
+                      onClick={handlePhoneLogin}>
                       Log in With Phone
                     </button>
                   </div>
