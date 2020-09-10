@@ -46,7 +46,7 @@ const Auth = () => {
       style={{ height: "100vh" }}>
       <div className="container">
         <div className="row">
-          <div className="auth-left-side col-md-7">
+          <div className="auth-left-side col-lg-7">
             <h1
               className="text-blue-light mt-5 font-weight-bold"
               style={{ fontSize: "4rem" }}>
@@ -57,7 +57,7 @@ const Auth = () => {
             </h3>
           </div>
 
-          <div className="auth-right-side col-md-5">
+          <div className="auth-right-side col-lg-5">
             <div className="card shadow w-100">
               <div className="card-body">
                 <form action="" className="form-group">
@@ -75,16 +75,16 @@ const Auth = () => {
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Username"
+                      placeholder="Password"
                       aria-label="Username"
                       aria-describedby="basic-addon1"
                     />
                   </div>
 
                   <button
-                    className="btn btn-primary w-100 bg-blue-light"
+                    className="btn btn-primary w-100 bg-blue-light justify-content-center"
                     type="submit">
-                    <h5>Log In</h5>
+                    <h5 className=" text-white">Log In</h5>
                   </button>
                 </form>
                 <div className="d-flex flex-column align-items-center">
@@ -107,7 +107,7 @@ const Auth = () => {
 
                     <button
                       ref={signInBtn}
-                      className="btn bg-primary  my-2"
+                      className="btn bg-primary  my-2 text-white"
                       onClick={handlePhoneLogin}>
                       Log in With Phone
                     </button>

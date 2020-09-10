@@ -5,6 +5,7 @@ import { Dropdown, Menu, Modal } from "antd";
 import firebase from "./../firebase";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 const TopNavBar = () => {
   const { replace } = useHistory();
   const { user } = useSelector((state) => state);

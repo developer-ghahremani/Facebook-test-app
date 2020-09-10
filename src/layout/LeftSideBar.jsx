@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import { MoreHoriz } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 

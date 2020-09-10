@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Feed from "./Feed";
 import { firestore } from "./../firebase";
 import { useEffect } from "react";
+import MyAnim from "./MyAnim";
 
 const Feeds = () => {
-  const [feeds, setFeeds] = useState([]);
+  const [feeds, setFeeds] = useState(null);
 
   const setUpFireStore = () => {
     firestore
@@ -39,7 +40,7 @@ const Feeds = () => {
       console.log(error);
     }
   };
-
+  if (!feeds) return <MyAnim />;
   return (
     <div>
       {feeds.map((item) => (
