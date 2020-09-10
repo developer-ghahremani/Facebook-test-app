@@ -1,8 +1,36 @@
 import React from "react";
 import { Avatar, IconButton } from "@material-ui/core";
 import { MoreHoriz } from "@material-ui/icons";
-
+import { Dropdown, Menu, Modal } from "antd";
+import firebase from "./../firebase";
+import { useHistory } from "react-router-dom";
 const TopNavBar = () => {
+  const { replace } = useHistory();
+  const handleSignOut = async (params) => {
+   
+    try {
+      const result = await firebase.auth().signOut();
+      console.log(result, "loged out");
+      localStorage.removeItem("credential");
+      replace("/auth");
+    } catch ({ message }) {
+      console.log({ message });
+    }
+  };
+
+  const menu = (
+    <Menu
+      onClick={({ key }) => {
+        Modal.confirm({
+          title: "User Log Out",
+          content: "Are You Sure to log Out?",
+          okText: "Yes",
+          onOk: handleSignOut,
+        });
+      }}>
+      <Menu.Item key="1">Log Out</Menu.Item>
+    </Menu>
+  );
   return (
     <header>
       <nav className="bg-primary py-2">
@@ -60,9 +88,12 @@ const TopNavBar = () => {
                   srcset=""
                 />
               </IconButton>
-              <IconButton>
-                <MoreHoriz />
-              </IconButton>
+
+              <Dropdown overlay={menu} placement="bottomCenter">
+                <IconButton>
+                  <MoreHoriz />
+                </IconButton>
+              </Dropdown>
             </div>
           </div>
         </div>

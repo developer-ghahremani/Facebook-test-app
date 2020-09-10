@@ -1,18 +1,23 @@
-import React, { lazy, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import routes from "./routes";
+import { useSelector } from "react-redux";
 
 const FaceBook = () => {
-  const Auth = lazy(() => import("./pages/Auth"));
-  const Home = lazy(() => import("./pages/Home"));
-
+  const { user } = useSelector((state) => state);
   useEffect(() => {
     document.body.classList.add("bg-light");
   }, []);
 
   return (
     <Switch>
-      <Route path="/" exact component={Auth} />
-      <Route path="/" exact component={Home} />
+      <Route>
+        {routes.map((item, index) => (
+          <Route path={item.path} exact component={item.component} />
+        ))}
+        {!user ? <Redirect from="/" to="/auth" /> : <Redirect to="/" />}
+        <Route render={() => <p>Hello 404</p>} />
+      </Route>
     </Switch>
   );
 };

@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { auth, googleAuth } from "./../firebase";
 import { useDispatch } from "react-redux";
 import { SET_USER } from "../Redux/type";
 import firebase from "firebase";
 import { useRef } from "react";
+import PhoneAuth from "./PhoneAuth";
+import { useHistory } from "react-router-dom";
 const Auth = () => {
   const dispatch = useDispatch();
+  const [phoneAuth, setPhoneAuth] = useState(false);
   const signInBtn = useRef(null);
-
+  const { replace } = useHistory();
   useEffect(() => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
       signInBtn.current,
       {
         size: "invisible",
         callback: function (response) {
-          console.log(response);
           // reCAPTCHA solved, allow signInWithPhoneNumber.
           // onSignInSubmit();
         },
@@ -23,28 +25,21 @@ const Auth = () => {
   }, []);
 
   const handlePhoneLogin = async (params) => {
-    try {
-      const confirmationResult = await auth.signInWithPhoneNumber(
-        "+989126894100",
-        window.recaptchaVerifier
-      );
-
-      window.confirmationResult = confirmationResult;
-      console.log(confirmationResult, "cnf");
-    } catch (error) {
-      console.log(error, "err");
-    }
+    setPhoneAuth(true);
   };
+
   const handleGoogleLogin = async () => {
     try {
       const { credential, user } = await auth.signInWithPopup(googleAuth);
       localStorage.setItem("credential", JSON.stringify(credential));
       dispatch({ type: SET_USER, payload: user });
-    } catch ({ message }) {
-      console.log(message);
+      replace("/");
+    } catch (error) {
+      console.log(error, "err");
     }
   };
   // return <p>Hello</p>;
+
   return (
     <div
       className="bg-light w-100 d-flex align-items-center justify-content-center"
@@ -66,7 +61,7 @@ const Auth = () => {
             <div className="card shadow w-100">
               <div className="card-body">
                 <form action="" className="form-group">
-                  <div class="input-group mb-3">
+                  <div className="input-group mb-3">
                     <input
                       type="text"
                       class="form-control"
@@ -127,6 +122,7 @@ const Auth = () => {
           </div>
         </div>
       </div>
+      <PhoneAuth isOpen={phoneAuth} setOpen={setPhoneAuth} />;
     </div>
   );
 };
