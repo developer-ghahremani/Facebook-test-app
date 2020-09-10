@@ -16,7 +16,7 @@ const FaceBook = () => {
           <Route path={item.path} exact component={item.component} />
         ))}
         {!user ? <Redirect from="/" to="/auth" /> : <Redirect to="/" />}
-        <Route render={() => <p>Hello 404</p>} />
+        {/* <Route render={() => <p>Hello 404</p>} /> */}
       </Route>
     </Switch>
   );

@@ -12,6 +12,7 @@ const firebaseConfig = {
 
 const fbsConfig = firebase.initializeApp(firebaseConfig);
 const auth = fbsConfig.auth();
-const googleAuth =new firebase.auth.GoogleAuthProvider();
-export { auth, googleAuth };
+const googleAuth = new firebase.auth.GoogleAuthProvider();
+const firestore = fbsConfig.firestore();
+export { auth, googleAuth, firestore };
 export default fbsConfig;

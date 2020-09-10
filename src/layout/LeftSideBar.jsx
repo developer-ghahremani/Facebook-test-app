@@ -1,8 +1,10 @@
 import React from "react";
 import { Avatar, IconButton } from "@material-ui/core";
 import { MoreHoriz } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 
 const LeftSideBar = () => {
+  const { user } = useSelector((state) => state);
   const primaryItems = [
     { image: "/images/feed.png", name: "News Feed", hasMoreButton: true },
     { image: "/images/messager.png", name: "Messanger" },
@@ -21,8 +23,11 @@ const LeftSideBar = () => {
   return (
     <div className="px-4">
       <div className="d-flex align-items-center mb-3 ">
-        <Avatar style={{ height: "1.5rem", width: "1.5rem" }} />
-        <span className="font-size-small mx-1">Reza Ghahremani</span>
+        <Avatar
+          style={{ height: "1.5rem", width: "1.5rem" }}
+          src={user.photoURL}
+        />
+        <span className="font-size-small mx-1">{user.displayName}</span>
       </div>
       {primaryItems.map((item) => (
         <div className="sidebar-item d-flex justify-content-between align-items-center mb-2 ">

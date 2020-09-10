@@ -4,13 +4,14 @@ import { MoreHoriz } from "@material-ui/icons";
 import { Dropdown, Menu, Modal } from "antd";
 import firebase from "./../firebase";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 const TopNavBar = () => {
   const { replace } = useHistory();
+  const { user } = useSelector((state) => state);
+  console.log(user.photoURL);
   const handleSignOut = async (params) => {
-   
     try {
-      const result = await firebase.auth().signOut();
-      console.log(result, "loged out");
+      await firebase.auth().signOut();
       localStorage.removeItem("credential");
       replace("/auth");
     } catch ({ message }) {
@@ -50,8 +51,11 @@ const TopNavBar = () => {
             </div>
             <div className="d-flex align-items-center ">
               <div className="d-flex navbar-item  align-items-center">
-                <Avatar style={{ height: "1.5rem", width: "1.5rem" }}></Avatar>
-                <span className="mx-1">Reza</span>
+                <Avatar
+                  src={user.photoURL}
+                  
+                  style={{ height: "1.5rem", width: "1.5rem" }}/>
+                <span className="mx-1">{user.displayName}</span>
               </div>
               <div className="navbar-item navbar-item-active">Home</div>
               <div className="navbar-item">Find Friends</div>

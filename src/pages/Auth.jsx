@@ -11,6 +11,7 @@ const Auth = () => {
   const [phoneAuth, setPhoneAuth] = useState(false);
   const signInBtn = useRef(null);
   const { replace } = useHistory();
+
   useEffect(() => {
     window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
       signInBtn.current,
@@ -38,7 +39,6 @@ const Auth = () => {
       console.log(error, "err");
     }
   };
-  // return <p>Hello</p>;
 
   return (
     <div
