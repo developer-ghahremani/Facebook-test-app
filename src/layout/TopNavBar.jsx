@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const TopNavBar = () => {
   const { replace } = useHistory();
   const { user } = useSelector((state) => state);
-  console.log(user.photoURL);
+
   const handleSignOut = async (params) => {
     try {
       await firebase.auth().signOut();

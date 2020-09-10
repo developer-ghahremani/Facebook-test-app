@@ -3,22 +3,47 @@ import { Avatar } from "@material-ui/core";
 import { MoreHoriz } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { firestore } from "../firebase";
+import { firestore, db } from "../firebase";
 
 const CreatePost = () => {
   const [feed, setFeed] = useState("");
   const { user } = useSelector((state) => state);
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   if (!feed.length > 0) return;
+  //   try {
+  //     const result = await firestore.collection("feeds").add({
+  //       title: feed,
+  //       avatar: user.photoURL,
+  //       userDisplayName: user.displayName,
+  //       createdAt: new Date(),
+  //     });
+  //     console.log(result);
+  //     setFeed("");
+  //   } catch ({ message }) {
+  //     console.log(message);
+  //   }
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!feed.length > 0) return;
     try {
-      const result = await firestore.collection("feeds").add({
+      const result = await db.ref().child("feeds").push({
         title: feed,
         avatar: user.photoURL,
         userDisplayName: user.displayName,
         createdAt: new Date(),
       });
+      // const result = await firestore.collection("feeds").add(
+      //   {
+      //   title: feed,
+      //   avatar: user.photoURL,
+      //   userDisplayName: user.displayName,
+      //   createdAt: new Date(),
+      // }
+      // );
       console.log(result);
       setFeed("");
     } catch ({ message }) {
