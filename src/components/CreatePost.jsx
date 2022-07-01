@@ -1,9 +1,10 @@
-import React from "react";
+import { db, firestore } from "../firebase";
+
 import { Avatar } from "@material-ui/core";
 import { MoreHoriz } from "@material-ui/icons";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { firestore, db } from "../firebase";
 
 const CreatePost = () => {
   const [feed, setFeed] = useState("");
@@ -15,8 +16,8 @@ const CreatePost = () => {
   //   try {
   //     const result = await firestore.collection("feeds").add({
   //       title: feed,
-  //       avatar: user.photoURL,
-  //       userDisplayName: user.displayName,
+  //       avatar: user?.photoURL,
+  //       userDisplayName: user?.displayName,
   //       createdAt: new Date(),
   //     });
   //     console.log(result);
@@ -32,15 +33,15 @@ const CreatePost = () => {
     try {
       const result = await db.ref().child("feeds").push({
         title: feed,
-        avatar: user.photoURL,
-        userDisplayName: user.displayName,
+        avatar: user?.photoURL,
+        userDisplayName: user?.displayName,
         createdAt: new Date(),
       });
       // const result = await firestore.collection("feeds").add(
       //   {
       //   title: feed,
-      //   avatar: user.photoURL,
-      //   userDisplayName: user.displayName,
+      //   avatar: user?.photoURL,
+      //   userDisplayName: user?.displayName,
       //   createdAt: new Date(),
       // }
       // );
@@ -54,7 +55,7 @@ const CreatePost = () => {
   return (
     <div className="card shadow mt-2 p-2">
       <div className="d-flex align-items-center">
-        <Avatar src={user.photoURL} />
+        <Avatar src={user?.photoURL} />
         <form action="" onSubmit={handleSubmit} className="w-100 mx-2">
           <input
             type="text"
