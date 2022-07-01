@@ -42,7 +42,8 @@ const Auth = () => {
 
   return (
     <div
-      className="bg-light w-100 d-flex align-items-center justify-content-center"
+      className="bg-light w-100 d-flex align-items-center
+       justify-content-center"
       style={{ height: "100vh" }}>
       <div className="container">
         <div className="row">

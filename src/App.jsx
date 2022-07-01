@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./Redux";
 import { ToastProvider } from "react-toast-notifications";
 import ProgressModal from "./components/Modal/ProgressModal";
-import faker from "faker";
+
 const App = () => {
   // const temp = [];
   // for (let index = 0; index < 15; index++) {

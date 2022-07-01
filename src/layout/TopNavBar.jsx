@@ -1,7 +1,8 @@
-import React from "react";
 import { Avatar, IconButton } from "@material-ui/core";
-import { MoreHoriz } from "@material-ui/icons";
 import { Dropdown, Menu, Modal } from "antd";
+
+import { MoreHoriz } from "@material-ui/icons";
+import React from "react";
 import firebase from "./../firebase";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -53,10 +54,10 @@ const TopNavBar = () => {
             <div className="d-flex align-items-center ">
               <div className="d-flex navbar-item  align-items-center">
                 <Avatar
-                  src={user.photoURL}
-                  
-                  style={{ height: "1.5rem", width: "1.5rem" }}/>
-                <span className="mx-1">{user.displayName}</span>
+                  src={user?.photoURL}
+                  style={{ height: "1.5rem", width: "1.5rem" }}
+                />
+                <span className="mx-1">{user?.displayName}</span>
               </div>
               <div className="navbar-item navbar-item-active">Home</div>
               <div className="navbar-item">Find Friends</div>

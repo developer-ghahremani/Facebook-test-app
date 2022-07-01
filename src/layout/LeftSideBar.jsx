@@ -1,6 +1,6 @@
-import React from "react";
 import { Avatar } from "@material-ui/core";
 import { MoreHoriz } from "@material-ui/icons";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const LeftSideBar = () => {
@@ -25,9 +25,9 @@ const LeftSideBar = () => {
       <div className="d-flex align-items-center mb-3 ">
         <Avatar
           style={{ height: "1.5rem", width: "1.5rem" }}
-          src={user.photoURL}
+          src={user?.photoURL}
         />
-        <span className="font-size-small mx-1">{user.displayName}</span>
+        <span className="font-size-small mx-1">{user?.displayName}</span>
       </div>
       {primaryItems.map((item) => (
         <div className="sidebar-item d-flex justify-content-between align-items-center mb-2 ">

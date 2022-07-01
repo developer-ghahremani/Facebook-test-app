@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 const FaceBook = () => {
   const { user } = useSelector((state) => state);
+
   useEffect(() => {
     document.body.classList.add("bg-light");
   }, []);
@@ -12,11 +13,12 @@ const FaceBook = () => {
   return (
     <Switch>
       <Route>
-        {routes.map((item, index) => (
+        {routes.map((item) => (
           <Route path={item.path} exact component={item.component} />
         ))}
-        {!user ? <Redirect from="/" to="/auth" /> : <Redirect to="/" />}
-        {/* <Route render={() => <p>Hello 404</p>} /> */}
+        {/* {!user ?
+         <Redirect from="/" to="/auth" /> 
+        : <Redirect to="/" />} */}
       </Route>
     </Switch>
   );
